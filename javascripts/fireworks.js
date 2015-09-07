@@ -41,31 +41,30 @@ class Fireworks {
     }
   }
 
+  update() {
+    for (let spark of this.sparks) {
+      spark.x += spark.vx;
+      spark.y += spark.vy + this.settings.gravity;
+      spark.vx *= this.settings.damping;
+      spark.vy *= this.settings.damping;
+      this.draw(spark);
+    }
+    this.context.globalCompositeOperation = 'source-over';
+    this.context.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.sparkSize *= 0.97;
+    if (this.sparkSize < 0.03) {
+      this.fire();
+      return;
+    }
+    requestAnimationFrame(this.update.bind(this));
+  }
+
   fire() {
     this.sparkSize = this.settings.sparkSize;
     this.sparks = [];
     this.initSparks();
-
-    let update = () => {
-      for (let spark of this.sparks) {
-        spark.x += spark.vx;
-        spark.y += spark.vy + this.settings.gravity;
-        spark.vx *= this.settings.damping;
-        spark.vy *= this.settings.damping;
-        this.draw(spark);
-      }
-      this.context.globalCompositeOperation = 'source-over';
-      this.context.fillStyle = 'rgba(0, 0, 0, 0.3)';
-      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.sparkSize *= 0.97;
-      if (this.sparkSize < 0.03) {
-        this.fire();
-        return;
-      }
-      requestAnimationFrame(update);
-    }
-
-    requestAnimationFrame(update);
+    requestAnimationFrame(this.update.bind(this));
   }
 
   draw(spark) {
