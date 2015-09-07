@@ -1,7 +1,7 @@
 'use strict';
 
 for (var vendor of ['moz', 'o', 'ms']) {
-  window.requestAnimationFrame = window[vendor + 'RequestAnimationFrame'];
+  window.requestAnimationFrame = window[`${vendor}RequestAnimationFrame`];
   if (window.requestAnimationFrame) {
     break;
   }
