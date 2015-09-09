@@ -1,6 +1,6 @@
 'use strict';
 
-for (var vendor of ['moz', 'o', 'ms']) {
+for (let vendor of ['moz', 'o', 'ms']) {
   window.requestAnimationFrame = window[`${vendor}RequestAnimationFrame`];
   if (window.requestAnimationFrame) {
     break;
