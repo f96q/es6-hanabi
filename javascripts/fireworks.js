@@ -24,10 +24,10 @@ class Fireworks {
     let x = this.canvas.width / 2;
     let y = this.canvas.height / 2;
 
-    for (let i = 0; i <= 1.0; i += 0.002) {
-      let vx = i;
+    for (let i = 0; i <= 700; i++) {
+      let vx = Math.random();
       let vy1 = Math.pow(vx, 2 / 3) - Math.sqrt(1 - (vx * vx));
-      let vy2 = Math.pow(vx, 2 / 3) + Math.sqrt(1 - (vx * vx));
+      let vy2 = Math.pow(vx, 2 / 3) + Math.sqrt(1 - (vx * vx)) - 0.4;
       let speed = Math.random() * 6;
 
       vx *= speed;
